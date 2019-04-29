@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QianKunConsole", "QianKunConsole\QianKunConsole.csproj", "{AA3CE4A1-CBA0-49D9-BEFF-3899174D6D91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QianKunHelper", "QianKunHelper\QianKunHelper.csproj", "{B7B1AC48-7F43-413A-8F1C-3E24D50156C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QianKunWebApi", "QianKunWebApi", "{791F8C74-D17C-447F-94E4-226C933C0EC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QianKunApi", "QianKunApi\QianKunApi.csproj", "{2DD5CC90-B595-4D95-B0B5-D308A83090F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA3CE4A1-CBA0-49D9-BEFF-3899174D6D91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3CE4A1-CBA0-49D9-BEFF-3899174D6D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3CE4A1-CBA0-49D9-BEFF-3899174D6D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3CE4A1-CBA0-49D9-BEFF-3899174D6D91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7B1AC48-7F43-413A-8F1C-3E24D50156C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7B1AC48-7F43-413A-8F1C-3E24D50156C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7B1AC48-7F43-413A-8F1C-3E24D50156C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7B1AC48-7F43-413A-8F1C-3E24D50156C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DD5CC90-B595-4D95-B0B5-D308A83090F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD5CC90-B595-4D95-B0B5-D308A83090F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD5CC90-B595-4D95-B0B5-D308A83090F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD5CC90-B595-4D95-B0B5-D308A83090F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2DD5CC90-B595-4D95-B0B5-D308A83090F7} = {791F8C74-D17C-447F-94E4-226C933C0EC5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {407E40D9-23C2-4DFD-A8B7-F34BB9BFEB56}
+	EndGlobalSection
+EndGlobal
