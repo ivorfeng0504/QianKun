@@ -10,9 +10,9 @@ namespace QianKunConsole
         private static QianKun QianKun = new QianKun();
         static void Main(string[] args)
         {
-            var log = new LogManager<Program>().Log;
+            var log = LogManager.GetLog<Program>();
+            log.Info("hello");
             QianKun.Action();
-            Console.WriteLine("Hello World!");
             Console.ReadKey();
         }
     }
@@ -21,6 +21,8 @@ namespace QianKunConsole
     {
         public async void Action()
         {
+            var id = Thread.GetCurrentProcessorId();
+            Console.WriteLine("Action:" + id);
             Console.WriteLine("喝茶1...");
             var title = await LookNewsTitleAsync();
             Console.WriteLine("喝茶2...");
@@ -28,10 +30,15 @@ namespace QianKunConsole
         }
         public Task<string> LookNewsTitleAsync()
         {
+            var id = Thread.GetCurrentProcessorId();
+            Console.WriteLine("LookNewsTitleAsync:" + id);
             return Task.Run(LookNewsTitle);
         }
         public string LookNewsTitle()
         {
+
+            var id = Thread.GetCurrentProcessorId();
+            Console.WriteLine("LookNewsTitle:" + id);
             Console.WriteLine("查看新闻标题...");
             Thread.Sleep(1000);
             Console.WriteLine("查看完成...");

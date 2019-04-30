@@ -1,15 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace QianKunHelper.LogHelper
 {
-    public class LogManager<T>
+    public class LogManager
     {
-        public ILog Log;
-        public LogManager()
+        private static readonly object obj = new object();
+        private static ILoggerFactory _loggerFactory;
+
+        public static ILoggerFactory LoggerFactory
         {
-            Log = LoggerFactroy.GetLogger(typeof(T));
+            get
+            {
+                if (_loggerFactory != null) return _loggerFactory;
+                lock (obj)
+                {
+                    if (_loggerFactory != null) return _loggerFactory;
+                    var logConfig = ConfigurationManager.AppSettings["logConifg"];
+                    if (!string.IsNullOrWhiteSpace(logConfig))
+                    {
+                        string[] typeInfo = logConfig.Split(',');
+                        Assembly assembly = Assembly.Load(typeInfo[0]);
+                        var type = assembly.GetType(typeInfo[1]);
+                        _loggerFactory = (ILoggerFactory)Activator.CreateInstance(type);
+                    }
+                    else
+                    {
+                        _loggerFactory = new Log4netLoggerFactroy();
+                    }
+                }
+
+                return _loggerFactory;
+            }
+        }
+
+        public static ILog GetLog<T>()
+        {
+            return LoggerFactory.GetLogger(typeof(T));
         }
     }
 }

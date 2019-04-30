@@ -1,195 +1,384 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace QianKunHelper.LogHelper
 {
     public class NlogLogger : ILog
     {
-        public bool IsDebugEnabled => throw new NotImplementedException();
+        private NLog.Logger _log;
 
-        public bool IsInfoEnabled => throw new NotImplementedException();
+        public NlogLogger(Type t)
+        {
+            _log = NLog.LogManager.GetCurrentClassLogger(t);
+        }
+        /// <summary>
+        /// //输出到控制台
+        /// </summary>
+        private static void Diagnostics(object message, Exception exception)
+        {
+            string msg = (message == null ? string.Empty : message.ToString());
+            if (exception != null)
+            {
+                msg += ", Exception: " + exception.Message;
+            }
+            System.Diagnostics.Debug.WriteLine(msg);
+        }
 
-        public bool IsWarnEnabled => throw new NotImplementedException();
-
-        public bool IsErrorEnabled => throw new NotImplementedException();
-
-        public bool IsFatalEnabled => throw new NotImplementedException();
-
+        /// <summary>
+        /// //输出到控制台
+        /// </summary>
+        private static void DiagnosticsFormat(object message, params object[] args)
+        {
+            string msg = (message == null ? string.Empty : message.ToString());
+            System.Diagnostics.Debug.WriteLine(msg, args);
+        }
+        /// <summary>
+        /// 记录Debug消息
+        /// </summary>
+        /// <param name="message"></param>
         public void Debug(object message)
         {
-            throw new NotImplementedException();
+            if (_log.IsDebugEnabled)
+            {
+                _log.Debug(message);
+            }
+            else
+            {
+                Diagnostics(message, null);
+            }
         }
 
-        public void Debug(object message, Exception exception)
+        /// <summary>
+        /// 记录Debug异常消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public void Debug(string message, Exception exception)
         {
-            throw new NotImplementedException();
+            if (_log.IsDebugEnabled)
+            {
+                _log.Debug(exception, message);
+            }
+            else
+            {
+                Diagnostics(message, exception);
+            }
         }
 
+        /// <summary>
+        /// 记录格式化的Debug消息
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
         public void DebugFormat(string format, params object[] args)
         {
-            throw new NotImplementedException();
+            if (_log.IsDebugEnabled)
+            {
+                _log.Debug(format, args);
+            }
+            else
+            {
+                DiagnosticsFormat(format, args);
+            }
+        }
+
+        /// <summary>
+        /// 记录错误消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void Error(object message)
+        {
+            if (_log.IsErrorEnabled)
+            {
+                _log.Error(message);
+            }
+            else
+            {
+                Diagnostics(message, null);
+            }
+        }
+
+        /// <summary>
+        /// 记录错误异常消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public void Error(string message, Exception exception)
+        {
+            if (_log.IsErrorEnabled)
+            {
+                _log.Error(exception, message);
+            }
+            else
+            {
+                Diagnostics(message, exception);
+            }
+        }
+
+        /// <summary>
+        /// 记录错误格式化消息
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        public void ErrorFormat(string format, params object[] args)
+        {
+            if (_log.IsErrorEnabled)
+            {
+                _log.Error(format, args);
+            }
+            else
+            {
+                DiagnosticsFormat(format, args);
+            }
+        }
+
+        /// <summary>
+        /// 记录程序致命消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void Fatal(object message)
+        {
+            if (_log.IsFatalEnabled)
+            {
+                _log.Fatal(message);
+            }
+            else
+            {
+                Diagnostics(message, null);
+            }
+        }
+
+        /// <summary>
+        /// 记录程序致命异常消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public void Fatal(string message, Exception exception)
+        {
+            if (_log.IsFatalEnabled)
+            {
+                _log.Fatal(exception, message);
+            }
+            else
+            {
+                Diagnostics(message, exception);
+            }
+        }
+
+        /// <summary>
+        /// 记录程序致命格式化消息
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        public void FatalFormat(string format, params object[] args)
+        {
+            if (_log.IsFatalEnabled)
+            {
+                _log.Fatal(format, args);
+            }
+            else
+            {
+                DiagnosticsFormat(format, args);
+            }
+        }
+
+        /// <summary>
+        /// 记录运行消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void Info(object message)
+        {
+            if (_log.IsInfoEnabled)
+            {
+                _log.Info(message);
+            }
+            else
+            {
+                Diagnostics(message, null);
+            }
+        }
+
+        /// <summary>
+        /// 记录运行异常消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public void Info(string message, Exception exception)
+        {
+            if (_log.IsInfoEnabled)
+            {
+                _log.Info(exception, message);
+            }
+            else
+            {
+                Diagnostics(message, exception);
+            }
+        }
+
+        /// <summary>
+        /// 记录运行格式化消息
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        public void InfoFormat(string format, params object[] args)
+        {
+            if (_log.IsInfoEnabled)
+            {
+                _log.Info(format, args);
+            }
+            else
+            {
+                DiagnosticsFormat(format, args);
+            }
+        }
+
+        /// <summary>
+        /// 记录警告消息
+        /// </summary>
+        /// <param name="message"></param>
+        public void Warn(object message)
+        {
+            if (_log.IsWarnEnabled)
+            {
+                _log.Warn(message);
+            }
+            else
+            {
+                Diagnostics(message, null);
+            }
+        }
+
+        /// <summary>
+        /// 记录警告异常消息
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="exception"></param>
+        public void Warn(string message, Exception exception)
+        {
+            if (_log.IsWarnEnabled)
+            {
+                _log.Warn(exception, message);
+            }
+            else
+            {
+                Diagnostics(message, exception);
+            }
+        }
+
+        /// <summary>
+        /// 记录警告格式化消息
+        /// </summary>
+        /// <param name="format"></param>
+        /// <param name="args"></param>
+        public void WarnFormat(string format, params object[] args)
+        {
+            if (_log.IsWarnEnabled)
+            {
+                _log.Warn(format, args);
+            }
+            else
+            {
+                DiagnosticsFormat(format, args);
+            }
         }
 
         public void DebugFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Error(object message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Error(object message, Exception exception)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ErrorFormat(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
 
         public void ErrorFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Fatal(object message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Fatal(object message, Exception exception)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void FatalFormat(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
 
         public void FatalFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Info(object message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Info(object message, Exception exception)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InfoFormat(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
 
         public void InfoFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
-        }
 
-        public void Warn(object message)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Warn(object message, Exception exception)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void WarnFormat(string format, params object[] args)
-        {
-            throw new NotImplementedException();
         }
 
         public void WarnFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

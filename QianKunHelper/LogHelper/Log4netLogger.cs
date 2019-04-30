@@ -1,33 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace QianKunHelper.LogHelper
 {
     public class Log4netLogger : ILog
     {
-        public bool IsDebugEnabled => throw new NotImplementedException();
-
-        public bool IsInfoEnabled => throw new NotImplementedException();
-
-        public bool IsWarnEnabled => throw new NotImplementedException();
-
-        public bool IsErrorEnabled => throw new NotImplementedException();
-
-        public bool IsFatalEnabled => throw new NotImplementedException();
-        public log4net.ILog _log = null;
-        static Log4netLogger()
+        public log4net.ILog _log;
+        public Log4netLogger(string repository, Type t)
         {
-            var domain = "log4net";
-            var repository = log4net.LogManager.CreateRepository(domain);
-            string log4netFile = Path.Combine(Directory.GetCurrentDirectory(), "Config\\log4net.config");
-            var fileInfo = new FileInfo(log4netFile);
-            log4net.Config.XmlConfigurator.Configure(repository, fileInfo);
-        }
-        public Log4netLogger(Type t)
-        {
-            _log = log4net.LogManager.GetLogger(t);
+            _log = log4net.LogManager.GetLogger(repository, t);
         }
         /// <summary>
         /// //输出到控制台
@@ -48,7 +28,7 @@ namespace QianKunHelper.LogHelper
         private static void DiagnosticsFormat(object message, params object[] args)
         {
             string msg = (message == null ? string.Empty : message.ToString());
-            System.Diagnostics.Debug.WriteLine(string.Format(msg, args));
+            System.Diagnostics.Debug.WriteLine(msg, args);
         }
         /// <summary>
         /// 记录Debug消息
@@ -71,7 +51,7 @@ namespace QianKunHelper.LogHelper
         /// </summary>
         /// <param name="message"></param>
         /// <param name="exception"></param>
-        public void Debug(object message, Exception exception)
+        public void Debug(string message, Exception exception)
         {
             if (_log.IsDebugEnabled)
             {
@@ -92,7 +72,7 @@ namespace QianKunHelper.LogHelper
         {
             if (_log.IsDebugEnabled)
             {
-                _log.DebugFormat(string.Format("系统{0},类目{1},", "", "") + format, args);
+                _log.DebugFormat(format, args);
             }
             else
             {
@@ -121,7 +101,7 @@ namespace QianKunHelper.LogHelper
         /// </summary>
         /// <param name="message"></param>
         /// <param name="exception"></param>
-        public void Error(object message, Exception exception)
+        public void Error(string message, Exception exception)
         {
             if (_log.IsErrorEnabled)
             {
@@ -142,7 +122,7 @@ namespace QianKunHelper.LogHelper
         {
             if (_log.IsErrorEnabled)
             {
-                _log.ErrorFormat(string.Format("系统{0},类目{1},", "", "") + format, args);
+                _log.ErrorFormat(format, args);
             }
             else
             {
@@ -171,7 +151,7 @@ namespace QianKunHelper.LogHelper
         /// </summary>
         /// <param name="message"></param>
         /// <param name="exception"></param>
-        public void Fatal(object message, Exception exception)
+        public void Fatal(string message, Exception exception)
         {
             if (_log.IsFatalEnabled)
             {
@@ -192,7 +172,7 @@ namespace QianKunHelper.LogHelper
         {
             if (_log.IsFatalEnabled)
             {
-                _log.FatalFormat(string.Format("系统{0},类目{1},", "", "") + format, args);
+                _log.FatalFormat(format, args);
             }
             else
             {
@@ -221,7 +201,7 @@ namespace QianKunHelper.LogHelper
         /// </summary>
         /// <param name="message"></param>
         /// <param name="exception"></param>
-        public void Info(object message, Exception exception)
+        public void Info(string message, Exception exception)
         {
             if (_log.IsInfoEnabled)
             {
@@ -242,7 +222,7 @@ namespace QianKunHelper.LogHelper
         {
             if (_log.IsInfoEnabled)
             {
-                _log.InfoFormat(string.Format("系统{0},类目{1},", "", "") + format, args);
+                _log.InfoFormat(format, args);
             }
             else
             {
@@ -271,7 +251,7 @@ namespace QianKunHelper.LogHelper
         /// </summary>
         /// <param name="message"></param>
         /// <param name="exception"></param>
-        public void Warn(object message, Exception exception)
+        public void Warn(string message, Exception exception)
         {
             if (_log.IsWarnEnabled)
             {
@@ -292,7 +272,7 @@ namespace QianKunHelper.LogHelper
         {
             if (_log.IsWarnEnabled)
             {
-                _log.WarnFormat(string.Format("系统{0},类目{1},", "", "") + format, args);
+                _log.WarnFormat(format, args);
             }
             else
             {
@@ -302,102 +282,102 @@ namespace QianKunHelper.LogHelper
 
         public void DebugFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void DebugFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void ErrorFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void FatalFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void InfoFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(string format, object arg0)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(string format, object arg0, object arg1)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(string format, object arg0, object arg1, object arg2)
         {
-            throw new NotImplementedException();
+
         }
 
         public void WarnFormat(IFormatProvider provider, string format, params object[] args)
         {
-            throw new NotImplementedException();
+
         }
     }
 }
