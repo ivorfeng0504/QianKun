@@ -16,7 +16,7 @@ namespace QianKunHelper.LogHelper
                 lock (obj)
                 {
                     if (_loggerFactory != null) return _loggerFactory;
-                    var logConfig = ConfigurationManager.AppSettings["logConifg"];
+                    var logConfig = ConfigurationManager.AppSettings["logConfig"];
                     if (!string.IsNullOrWhiteSpace(logConfig))
                     {
                         string[] typeInfo = logConfig.Split(',');

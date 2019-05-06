@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
     <PackageReference Include="NLog" Version="4.6.2" />
+    <PackageReference Include="ServiceStack.Redis" Version="5.5.0" />
   </ItemGroup>
 
 </Project>
