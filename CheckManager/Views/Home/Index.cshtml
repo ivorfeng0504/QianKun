@@ -1,0 +1,177 @@
+﻿@using CheckManagerModel
+
+@{
+    ViewData["Title"] = "总预览";
+    var list = Model as List<BrandInfo>;
+}
+@section Style {
+    <style type="text/css">
+        .field-border-green {
+            border-color: #009688 !important;
+        }
+
+        .field-border-red {
+            border-color: #FF5722;
+        }
+
+        .field-border-orange {
+            border-color: #FFB800 !important;
+        }
+
+        .layui-elem-field a {
+            float: right;
+            margin-bottom: 10px;
+        }
+    </style>
+}
+<div class="layui-card">
+    <div class="layui-card-body">
+        <div class="layui-form-item" style="        margin-bottom: 0">
+            <div class="layui-inline">
+                <label class="layui-form-label">品牌ID：</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="brandId" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <button id="btnSearchBrand" class="layui-btn">
+                    <i class="layui-icon">&#xe615;</i> 搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">腾讯云</div>
+            <div class="layui-card-body">
+                <fieldset id="fdsBrandCard_123" class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+                <hr />
+                <fieldset class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+                <hr />
+                <fieldset class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+                <hr />
+                <fieldset class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+                <hr />
+                <fieldset id="fdsBrandCard_3" class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">UCloud</div>
+            <div class="layui-card-body">
+                <fieldset id="fdsBrandCard_1" class="layui-elem-field">
+                    <legend>多样屋-123</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">微软东一</div>
+            <div class="layui-card-body">
+                <fieldset class="layui-elem-field field-border-orange">
+                    <legend>拉夏贝尔-310</legend>
+                    <div class="layui-field-box">
+                        <button class="layui-btn"><i class="layui-icon"></i></button>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">微软东二</div>
+            <div class="layui-card-body">
+                @foreach (var item in list)
+                {
+                    <fieldset id="fdsBrandCard_@item.BrandId" class="layui-elem-field @(item.IsWarn?"field-border-red":"")">
+                        <legend>@($"{item.BrandName}-{item.BrandId}")</legend>
+                        <div class="layui-field-box">
+                            <blockquote class="layui-elem-quote layui-quote-nm">商品中心：@item.PosNum</blockquote>
+                            <blockquote class="layui-elem-quote layui-quote-nm">CRM：@item.CrmNum</blockquote>
+                            <a class="layui-btn layui-btn-sm layui-btn-primary" href="BrandInfo?id=@item.BrandId">
+                                查看详情  <i class="layui-icon">&#xe65b;</i>
+                            </a>
+                        </div>
+                    </fieldset>
+                    <hr />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            $("#btnSearchBrand").click(function () {
+                $(".field-border-green").removeClass("field-border-green");
+                var brandId = $("#brandId").val();
+                if (!brandId) return false;
+
+                var selecter = "#fdsBrandCard_" + brandId;
+                $(selecter).addClass("field-border-green");
+
+                var top = $(selecter).offset().top;
+                $("#RenderBody").animate({ scrollTop: (top - 130) });
+                return true;
+            });
+        });
+    </script>
+}

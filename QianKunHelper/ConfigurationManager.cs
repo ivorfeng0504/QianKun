@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 
 namespace QianKunHelper
@@ -49,6 +51,40 @@ namespace QianKunHelper
             if (string.IsNullOrWhiteSpace(objectName) || string.IsNullOrWhiteSpace(attrName))
                 throw new Exception("objectName && attrName is not null or empty");
             return AppSettings[$"{objectName}:{index}:{attrName}"];
+        }
+        public static List<T> AppSettingOfList<T>(string objectName)
+        {
+            if (string.IsNullOrWhiteSpace(objectName))
+                throw new Exception("objectName && attrName is not null or empty");
+
+            Type t = typeof(T);
+            var list = new List<T>();
+            PropertyInfo[] propertyInfos = t.GetProperties();
+
+            var index = 0;
+            var flag = false;
+            while (true)
+            {
+                var model = (T)Activator.CreateInstance(t);
+                foreach (var prop in propertyInfos)
+                {
+                    var attrValue = AppSettingOfList(objectName, prop.Name, index);
+                    if (attrValue == null)
+                    {
+                        flag = true;
+                        break;
+                    }
+
+                    prop.SetValue(model,
+                        prop.PropertyType.IsEnum
+                            ? Convert.ChangeType(attrValue, typeof(int))
+                            : Convert.ChangeType(attrValue, prop.PropertyType));
+                }
+                if (flag) break;
+                list.Add(model);
+                index++;
+            }
+            return list;
         }
     }
 }

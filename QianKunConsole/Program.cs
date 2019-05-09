@@ -1,8 +1,12 @@
 ﻿using QianKunHelper.LogHelper;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using QianKunHelper;
 using QianKunHelper.CacheHelper;
+using QianKunHelper.DBHelper;
+using QianKunHelper.WebApiHelper;
 
 namespace QianKunConsole
 {
@@ -13,7 +17,8 @@ namespace QianKunConsole
         static void Main(string[] args)
         {
             Console.WriteLine("action...");
-            QianKun.ParallelTesting();
+            var list = ConfigurationManager.AppSettingOfList<DbConfig>("DbConfig");
+            QianKun.Get();
             Console.WriteLine("***end!");
             Console.ReadKey();
         }
@@ -22,7 +27,6 @@ namespace QianKunConsole
     public class QianKun
     {
         public ILog _log;
-
         public QianKun(ILog log)
         {
             _log = log;
@@ -66,7 +70,6 @@ namespace QianKunConsole
                        string key = $"key_{x}";
                        try
                        {
-
                            CacheManager.Cache.Set(key, Thread.CurrentThread.ManagedThreadId);
                            var value = CacheManager.Cache.Get(key);
                            _log.Debug($"{key}:{value}");
@@ -109,6 +112,28 @@ namespace QianKunConsole
                 }
             }
         }
+        #endregion
+
+        #region HttpClient
+
+        public void Get()
+        {
+            Parallel.For(0, 1000
+                , new ParallelOptions { MaxDegreeOfParallelism = 1000 }
+                , x =>
+                {
+                    var reslut = WebapiHelper.Get<int>("https://localhost:44335/api/values/" + x);
+                    Console.WriteLine(reslut.Data);
+                });
+
+        }
+
+        public void Post()
+        {
+            var reslut = WebapiHelper.Post<int>("https://localhost:44335/api/values", new Random().Next(100).ToString());
+            Console.WriteLine(reslut.Data);
+        }
+
         #endregion
     }
 }
