@@ -8,7 +8,8 @@ namespace CheckManagerModel
         public string BrandName { get; set; }
         public int CrmNum { get; set; }
         public int PosNum { get; set; }
-
+        public string CrmDbConnectiong { get; set; }
+        public string RtlDbConnectiong { get; set; }
         public bool IsWarn => CrmNum != PosNum;
     }
 }

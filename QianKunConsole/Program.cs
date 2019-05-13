@@ -1,8 +1,10 @@
 ﻿using QianKunHelper.LogHelper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CheckManagerBLL;
 using QianKunHelper;
 using QianKunHelper.CacheHelper;
 using QianKunHelper.DBHelper;
@@ -17,8 +19,11 @@ namespace QianKunConsole
         static void Main(string[] args)
         {
             Console.WriteLine("action...");
-            var list = ConfigurationManager.AppSettingOfList<DbConfig>("DbConfig");
-            QianKun.Get();
+
+            BrandInfoBll bll = new BrandInfoBll();
+            var list = bll.GetBrandInfos().ToList();
+            //var lenght = QianKun.Action();
+            //Console.WriteLine("lenght" + lenght.Result);
             Console.WriteLine("***end!");
             Console.ReadKey();
         }
@@ -26,6 +31,7 @@ namespace QianKunConsole
 
     public class QianKun
     {
+        public string x;
         public ILog _log;
         public QianKun(ILog log)
         {
@@ -33,30 +39,30 @@ namespace QianKunConsole
         }
 
         #region async&await
-        public async void Action()
+        public async Task<int> Action()
         {
-            var id = Thread.GetCurrentProcessorId();
-            Console.WriteLine("Action:" + id);
             Console.WriteLine("喝茶1...");
-            var title = await LookNewsTitleAsync();
+            var title1 = await LookNewsTitleAsync(2000);
+            var title2 = await LookNewsTitleAsync(1000);
             Console.WriteLine("喝茶2...");
-            Console.WriteLine(title);
+            Console.WriteLine(title1);
+            Console.WriteLine(title2);
+            return (title1 + title2).Length;
         }
-        public Task<string> LookNewsTitleAsync()
+        public Task<string> LookNewsTitleAsync(int sleep)
         {
-            var id = Thread.GetCurrentProcessorId();
-            Console.WriteLine("LookNewsTitleAsync:" + id);
-            return Task.Run(LookNewsTitle);
+            Console.WriteLine("LookNewsTitleAsync:" + Thread.CurrentThread.ManagedThreadId);
+            return Task.Run(() => LookNewsTitle(sleep));
         }
-        public string LookNewsTitle()
+        public string LookNewsTitle(int sleep)
         {
-
-            var id = Thread.GetCurrentProcessorId();
-            Console.WriteLine("LookNewsTitle:" + id);
+            Console.WriteLine("LookNewsTitle:" + Thread.CurrentThread.ManagedThreadId);
             Console.WriteLine("查看新闻标题...");
-            Thread.Sleep(1000);
+            Thread.Sleep(sleep);
+            var content = "中国海军成立70周年:" + sleep;
+            Console.WriteLine(content);
             Console.WriteLine("查看完成...");
-            return "中国海军成立70周年";
+            return content;
         }
         #endregion
 

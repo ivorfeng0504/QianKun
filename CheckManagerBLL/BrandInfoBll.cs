@@ -1,21 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using CheckManagerDAL;
 using CheckManagerModel;
+using CheckManagerModel.DbModels;
 
 namespace CheckManagerBLL
 {
     public class BrandInfoBll
     {
-        public List<BrandInfo> GetBrandInfos()
+        public IEnumerable<BrandInfo> GetBrandInfos()
         {
-            return new List<BrandInfo>
+            EzpEdDal ezpEdDal = new EzpEdDal("test.ezp-ed");
+            EzpBaseDal ezpBaseDal = new EzpBaseDal("test.ezp-base");
+            IEnumerable<Ed_base_brand> dbBrandList = null;
+            IEnumerable<Pf_sys_db_shard_nodes> dbShardNodes = null;
+            Parallel.Invoke(() =>
             {
-                new BrandInfo{BrandId =35,BrandName = "九牧王男装",CrmNum=1235,PosNum=895},
-                new BrandInfo{BrandId =42,BrandName = "EVISU服饰",CrmNum=1235,PosNum=895},
-                new BrandInfo{BrandId =24,BrandName = "红袖测试",CrmNum=1235,PosNum=895},
-                new BrandInfo{BrandId =47,BrandName = "玛丽黛佳",CrmNum=1235,PosNum=895},
-                new BrandInfo{BrandId =49,BrandName = "卡宾测试",CrmNum=1235,PosNum=895},
-            };
+                dbBrandList = ezpEdDal.GetEd_base_brand();
+            }, () =>
+            {
+                dbShardNodes = ezpBaseDal.GetPf_sys_db_shard_nodes();
+            });
+
+            if (dbBrandList == null || dbShardNodes == null) return null;
+
+            return dbBrandList.Select(x => new BrandInfo
+            {
+                BrandId = x.Id,
+                BrandName = x.Name,
+                CrmDbConnectiong = dbShardNodes.FirstOrDefault(n => n.DbShardingId == x.CrmDbShardingId && n.IsMaster == "0")?.DbConnString,
+                RtlDbConnectiong = dbShardNodes.FirstOrDefault(n => n.DbShardingId == x.RtlDbShardingId && n.IsMaster == "0")?.DbConnString
+            }).Where(x => !string.IsNullOrWhiteSpace(x.CrmDbConnectiong) && !string.IsNullOrWhiteSpace(x.RtlDbConnectiong));
         }
     }
 }

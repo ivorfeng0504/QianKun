@@ -9,16 +9,16 @@ namespace QianKunHelper.WebApiHelper
 {
     public class WebapiHelper
     {
-        private static ILog log = LogManager.GetLog<WebapiHelper>();
+        private static readonly ILog log = LogManager.GetLog<WebapiHelper>();
         public static ApiResult<T> Post<T>(string url, string postData)
         {
-            ApiResult<T> result = null;
+            ApiResult<T> result;
             try
             {
                 HttpContent httpContent = new StringContent(postData);
                 httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                var httpClient = HttpClientFactory.Create(new HttpClientHandler());
+                var httpClient = HttpClientFactory.Create();
                 var timeOut = ConfigurationManager.AppSettings["TimeOut"];
                 int.TryParse(timeOut, out int Timeout);
                 httpClient.Timeout = new TimeSpan(0, 0, Timeout <= 0 ? 5 : Timeout);
@@ -44,7 +44,7 @@ namespace QianKunHelper.WebApiHelper
 
         public static ApiResult<T> Get<T>(string url, Dictionary<string, string> haders = null)
         {
-            ApiResult<T> result = null;
+            ApiResult<T> result;
             try
             {
 
