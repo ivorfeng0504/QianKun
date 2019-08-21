@@ -17,7 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckManagerDAL", "CheckMan
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckManager", "CheckManager\CheckManager.csproj", "{C229FA2C-716F-4954-B83D-D504A4F2B759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckWebApi", "CheckWebApi\CheckWebApi.csproj", "{4027A719-6B47-4306-B07D-2DDFABADE80A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheckWebApi", "CheckWebApi\CheckWebApi.csproj", "{4027A719-6B47-4306-B07D-2DDFABADE80A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{50B28449-4432-429A-8C59-33E264A83253}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +57,14 @@ Global
 		{4027A719-6B47-4306-B07D-2DDFABADE80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4027A719-6B47-4306-B07D-2DDFABADE80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4027A719-6B47-4306-B07D-2DDFABADE80A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50B28449-4432-429A-8C59-33E264A83253}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B28449-4432-429A-8C59-33E264A83253}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B28449-4432-429A-8C59-33E264A83253}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B28449-4432-429A-8C59-33E264A83253}.Release|Any CPU.Build.0 = Release|Any CPU
+		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

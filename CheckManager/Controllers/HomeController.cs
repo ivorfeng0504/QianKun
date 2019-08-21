@@ -11,23 +11,29 @@ namespace CheckManager.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var bll = new BrandInfoBll();
-            var list = bll.GetBrandInfos();
+            var manager = new BllManager();
+            Stopwatch sw=new Stopwatch();
+            sw.Start();
+            var list = await manager.GeBrandInfosAsycn("test");
+            sw.Stop();
+            var dd = sw.ElapsedMilliseconds;
+            sw.Restart();
+            var list1 = manager.GeBrandInfos("test");
+            sw.Stop();
+            var bb=sw.ElapsedMilliseconds;
+
             return View(list);
         }
 
-        public IActionResult About()
+        public IActionResult Detail()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "详细差异";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Style {
+<style type="text/css">
+    .detail-badge {
+        top: 50%;
+        margin-top: -9px;
+        position: absolute;
+        right: 15px;
+    }
+
+    .detail-big-font {
+        font-size: 36px;
+        color: #666;
+        line-height: 36px;
+        padding: 5px 0 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        word-break: break-all;
+        white-space: nowrap;
+    }
+</style>
+}
+<div class="layui-row">
+    <div class="layui-col-md12">
+        <span class="layui-breadcrumb" lay-separator="-">
+            <a href="/">首页</a>
+            <a><cite>详细</cite></a>
+        </span>
+        <hr>
+    </div>
+</div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                商品中心
+                <span class="layui-badge layui-bg-blue detail-badge">SPU</span>
+            </div>
+            <div class="layui-card-body">
+                <p class="detail-big-font">12,000</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                CRM
+                <span class="layui-badge layui-bg-blue detail-badge">SPU</span>
+            </div>
+            <div class="layui-card-body">
+                <p class="detail-big-font">12,000</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                商品中心
+                <span class="layui-badge layui-bg-green detail-badge">SKU</span>
+            </div>
+            <div class="layui-card-body">
+                <p class="detail-big-font">59,666</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                CRM
+                <span class="layui-badge layui-bg-green detail-badge">SKU</span>
+            </div>
+            <div class="layui-card-body">
+                <p class="detail-big-font">56,666</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                商品中心-属性/规格
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col width="200">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>类别</th>
+                            <th>名称</th>
+                            <th>数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>属性</td>
+                            <td>系列</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>规格</td>
+                            <td>颜色</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>规格</td>
+                            <td>尺码</td>
+                            <td>98</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md6">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                CRM-属性
+            </div>
+            <div class="layui-card-body">
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="150">
+                        <col>
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>数量</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>系列</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>颜色</td>
+                            <td>10</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

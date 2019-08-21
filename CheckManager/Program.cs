@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using QianKunHelper;
 
 namespace CheckManager
 {
@@ -19,6 +20,7 @@ namespace CheckManager
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls(ConfigurationManager.AppSettings["UseUrls"] ?? "http://*:9966")
                 .UseStartup<Startup>();
     }
 }

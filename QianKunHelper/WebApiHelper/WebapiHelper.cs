@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using QianKunHelper.LogHelper;
 
@@ -41,7 +42,37 @@ namespace QianKunHelper.WebApiHelper
             log.Debug($"URL:{url};Request:{postData};Response:{JsonConvert.SerializeObject(result)}");
             return result;
         }
+        public static async Task<ApiResult<T>> PostAsync<T>(string url, string postData)
+        {
+            ApiResult<T> result;
+            try
+            {
+                HttpContent httpContent = new StringContent(postData);
+                httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
+                var httpClient = HttpClientFactory.Create();
+                var timeOut = ConfigurationManager.AppSettings["TimeOut"];
+                int.TryParse(timeOut, out int Timeout);
+                httpClient.Timeout = new TimeSpan(0, 0, Timeout <= 0 ? 5 : Timeout);
+                var response = await httpClient.PostAsync(url, httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    string responseJson = response.Content.ReadAsStringAsync().Result;
+                    result = new ApiResult<T>(responseJson);
+                }
+                else
+                {
+                    string sError = response.Content.ReadAsStringAsync().Result;
+                    result = new ApiResult<T>(new Exception(sError), "HTTP响应失败！", ApiResultState.OutException);
+                }
+            }
+            catch (Exception e)
+            {
+                result = new ApiResult<T>(e, "调用第三方接口异常！");
+            }
+            log.Debug($"URL:{url};Request:{postData};Response:{JsonConvert.SerializeObject(result)}");
+            return result;
+        }
         public static ApiResult<T> Get<T>(string url, Dictionary<string, string> haders = null)
         {
             ApiResult<T> result;

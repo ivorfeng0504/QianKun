@@ -11,9 +11,9 @@ namespace CheckWebApi.Controllers
     {
         public BllManager manager = new BllManager();
         [HttpGet]
-        public ActionResult<IEnumerable<BrandInfo>> GetBrandInfo()
+        public ActionResult<IEnumerable<BrandInfo>> GetBrandInfo(string cloudName)
         {
-            var list = manager.GeBrandInfos();
+            var list = manager.GeBrandInfos(cloudName);
             return list;
         }
     }

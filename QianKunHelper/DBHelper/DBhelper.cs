@@ -48,18 +48,24 @@ namespace QianKunHelper.DBHelper
         /// <param name="sql">配置文件名</param>
         /// <param name="key">sql语句名</param>
         /// <returns></returns>
-        public static string GetSql(string sql, string key)
+        public static string GetSql(string sql, string key = null)
         {
-            if (string.IsNullOrWhiteSpace(key)) return sql;
-            //文件路径
-            string filePath = string.Format(AppDomain.CurrentDomain.BaseDirectory + @"config\sql\{0}.config", sql);
-            //解析xml
-            XmlDocument Xdoc = new XmlDocument();
-            Xdoc.Load(filePath);
-            XmlNodeList list = Xdoc.SelectNodes("configuration/sqlmapping");
-            XmlNode mappingNode = list.Cast<XmlNode>().FirstOrDefault(x => x.Attributes["key"].Value.Equals(key));
-            XmlNode sqlNode = mappingNode.SelectSingleNode("sql");
-            return sqlNode.InnerText.Replace("\r\n", "").Trim();
+            try
+            {
+                if (string.IsNullOrWhiteSpace(key)) return sql;
+                string filePath = string.Format(AppDomain.CurrentDomain.BaseDirectory + @"config\sql\{0}.config", sql);
+                XmlDocument Xdoc = new XmlDocument();
+                Xdoc.Load(filePath);
+                XmlNodeList list = Xdoc.SelectNodes("configuration/sqlmapping");
+                XmlNode mappingNode = list.Cast<XmlNode>().FirstOrDefault(x => x.Attributes["key"].Value.Equals(key));
+                XmlNode sqlNode = mappingNode.SelectSingleNode("sql");
+                return sqlNode.InnerText.Replace("\r\n", "").Trim();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("GetSql异常", e);
+            }
+
         }
     }
 }

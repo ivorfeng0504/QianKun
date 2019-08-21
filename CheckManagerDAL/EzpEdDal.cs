@@ -23,9 +23,13 @@ namespace CheckManagerDAL
                 return db.Query<Ed_base_brand>(sql);
             }
         }
-        public Task<IEnumerable<Ed_base_brand>> GetEd_base_brandAsync()
+        public async Task<IEnumerable<Ed_base_brand>> GetEd_base_brandAsync()
         {
-            return Task.Run(GetEd_base_brand);
+            using (var db = DBhelper.GetDbConnection(_dbName))
+            {
+                var sql = DBhelper.GetSql("ezp_ed", "s.ed_base_brand");
+                return await db.QueryAsync<Ed_base_brand>(sql);
+            }
         }
     }
 }

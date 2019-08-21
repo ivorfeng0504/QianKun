@@ -8,7 +8,7 @@ namespace QianKunHelper.LogHelper
         private static readonly object obj = new object();
         private static ILoggerFactory _loggerFactory;
 
-        public static ILoggerFactory LoggerFactory
+        private static ILoggerFactory LoggerFactory
         {
             get
             {

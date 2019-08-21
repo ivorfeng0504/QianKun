@@ -8,7 +8,7 @@ namespace QianKunHelper.LogHelper
 
         public NlogLogger(Type t)
         {
-            _log = NLog.LogManager.GetCurrentClassLogger(t);
+            _log = NLog.LogManager.GetLogger($"{t.FullName}.{t.Name}");
         }
         /// <summary>
         /// //输出到控制台

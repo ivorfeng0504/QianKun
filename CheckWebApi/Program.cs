@@ -13,7 +13,7 @@ namespace CheckWebApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseUrls(ConfigurationManager.AppSettings["UseUrls"] ?? "http://*:9966")
+                //.UseUrls(ConfigurationManager.AppSettings["UseUrls"] ?? "http://*:9966")
                 .UseStartup<Startup>();
     }
 }

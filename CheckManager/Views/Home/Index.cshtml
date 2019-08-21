@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "总预览";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     var list = Model as List<BrandInfo>;
 }
 @section Style {
@@ -26,7 +27,7 @@
 }
 <div class="layui-card">
     <div class="layui-card-body">
-        <div class="layui-form-item" style="        margin-bottom: 0">
+        <div class="layui-form-item" style="margin-bottom: 0;">
             <div class="layui-inline">
                 <label class="layui-form-label">品牌ID：</label>
                 <div class="layui-input-inline">
@@ -42,66 +43,25 @@
     </div>
 </div>
 
-
 <div class="layui-row layui-col-space15">
     <div class="layui-col-md3">
         <div class="layui-card">
             <div class="layui-card-header">腾讯云</div>
             <div class="layui-card-body">
-                <fieldset id="fdsBrandCard_123" class="layui-elem-field">
-                    <legend>多样屋-123</legend>
-                    <div class="layui-field-box">
-                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
-                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
-                        <a class="layui-btn layui-btn-sm layui-btn-primary">
-                            查看详情  <i class="layui-icon">&#xe65b;</i>
-                        </a>
-                    </div>
-                </fieldset>
-                <hr />
-                <fieldset class="layui-elem-field">
-                    <legend>多样屋-123</legend>
-                    <div class="layui-field-box">
-                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
-                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
-                        <a class="layui-btn layui-btn-sm layui-btn-primary">
-                            查看详情  <i class="layui-icon">&#xe65b;</i>
-                        </a>
-                    </div>
-                </fieldset>
-                <hr />
-                <fieldset class="layui-elem-field">
-                    <legend>多样屋-123</legend>
-                    <div class="layui-field-box">
-                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
-                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
-                        <a class="layui-btn layui-btn-sm layui-btn-primary">
-                            查看详情  <i class="layui-icon">&#xe65b;</i>
-                        </a>
-                    </div>
-                </fieldset>
-                <hr />
-                <fieldset class="layui-elem-field">
-                    <legend>多样屋-123</legend>
-                    <div class="layui-field-box">
-                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
-                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
-                        <a class="layui-btn layui-btn-sm layui-btn-primary">
-                            查看详情  <i class="layui-icon">&#xe65b;</i>
-                        </a>
-                    </div>
-                </fieldset>
-                <hr />
-                <fieldset id="fdsBrandCard_3" class="layui-elem-field">
-                    <legend>多样屋-123</legend>
-                    <div class="layui-field-box">
-                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
-                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
-                        <a class="layui-btn layui-btn-sm layui-btn-primary">
-                            查看详情  <i class="layui-icon">&#xe65b;</i>
-                        </a>
-                    </div>
-                </fieldset>
+                @foreach (var item in list)
+                {
+                    <fieldset id="fdsBrandCard_@item.BrandId" class="layui-elem-field @(item.IsWarn?"field-border-red":"")">
+                        <legend>@($"{item.BrandName}-{item.BrandId}")</legend>
+                        <div class="layui-field-box">
+                            <blockquote class="layui-elem-quote layui-quote-nm">商品中心：@item.PosNum</blockquote>
+                            <blockquote class="layui-elem-quote layui-quote-nm">CRM：@item.CrmNum</blockquote>
+                            <a class="layui-btn layui-btn-sm layui-btn-primary" href="Home/Detail?id=@item.BrandId">
+                                查看详情<i class="layui-icon">&#xe65b;</i>
+                            </a>
+                        </div>
+                    </fieldset>
+                    <hr />
+                }
             </div>
         </div>
     </div>
@@ -126,10 +86,14 @@
         <div class="layui-card">
             <div class="layui-card-header">微软东一</div>
             <div class="layui-card-body">
-                <fieldset class="layui-elem-field field-border-orange">
-                    <legend>拉夏贝尔-310</legend>
+                <fieldset id="fdsBrandCard_199" class="layui-elem-field">
+                    <legend>小猪班纳-199</legend>
                     <div class="layui-field-box">
-                        <button class="layui-btn"><i class="layui-icon"></i></button>
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
                     </div>
                 </fieldset>
             </div>
@@ -139,20 +103,16 @@
         <div class="layui-card">
             <div class="layui-card-header">微软东二</div>
             <div class="layui-card-body">
-                @foreach (var item in list)
-                {
-                    <fieldset id="fdsBrandCard_@item.BrandId" class="layui-elem-field @(item.IsWarn?"field-border-red":"")">
-                        <legend>@($"{item.BrandName}-{item.BrandId}")</legend>
-                        <div class="layui-field-box">
-                            <blockquote class="layui-elem-quote layui-quote-nm">商品中心：@item.PosNum</blockquote>
-                            <blockquote class="layui-elem-quote layui-quote-nm">CRM：@item.CrmNum</blockquote>
-                            <a class="layui-btn layui-btn-sm layui-btn-primary" href="BrandInfo?id=@item.BrandId">
-                                查看详情  <i class="layui-icon">&#xe65b;</i>
-                            </a>
-                        </div>
-                    </fieldset>
-                    <hr />
-                }
+                <fieldset id="fdsBrandCard_159" class="layui-elem-field">
+                    <legend>海澜之家-299</legend>
+                    <div class="layui-field-box">
+                        <blockquote class="layui-elem-quote layui-quote-nm">商品中心：1564</blockquote>
+                        <blockquote class="layui-elem-quote layui-quote-nm">CRM：15612</blockquote>
+                        <a class="layui-btn layui-btn-sm layui-btn-primary">
+                            查看详情  <i class="layui-icon">&#xe65b;</i>
+                        </a>
+                    </div>
+                </fieldset>
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@ namespace CheckManagerBLL
     public class CrmBll
     {
         private EzpCrmDal dal = new EzpCrmDal();
-        ILog log = new NlogLogger(typeof(CrmBll));
+        private ILog log = LogManager.GetLog<CrmBll>();
 
         public int GetCrmPrdDetailCount(int brandId, string connectionStr, int dbType)
         {

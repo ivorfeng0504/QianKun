@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace CheckManagerModel
 {
@@ -11,5 +12,6 @@ namespace CheckManagerModel
         public string CrmDbConnectiong { get; set; }
         public string RtlDbConnectiong { get; set; }
         public bool IsWarn => CrmNum != PosNum;
+        public DbType DbType { get; set; }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using CheckManagerBLL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckWebApi.Controllers
@@ -12,9 +14,19 @@ namespace CheckWebApi.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<ActionResult<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var manager = new BllManager();
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+            var list = await manager.GeBrandInfosAsycn("test");
+            sw.Stop();
+            var dd = sw.ElapsedMilliseconds;
+            sw.Restart();
+            var list1 = manager.GeBrandInfos("test");
+            sw.Stop();
+            var bb = sw.ElapsedMilliseconds;
+            return $"dd:{dd}/bb:{bb}";
         }
 
         // GET api/values/5
