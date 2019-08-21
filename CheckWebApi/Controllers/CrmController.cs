@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CheckManagerBLL;
-using Microsoft.AspNetCore.Http;
+﻿using CheckManagerBLL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CheckWebApi.Controllers

@@ -10,6 +10,7 @@ namespace CheckWebApi.Controllers
     public class BrandController : ControllerBase
     {
         public BllManager manager = new BllManager();
+
         [HttpGet]
         public ActionResult<IEnumerable<BrandInfo>> GetBrandInfo(string cloudName)
         {

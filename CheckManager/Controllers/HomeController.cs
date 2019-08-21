@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using CheckManager.Models;
+﻿using CheckManager.Models;
 using CheckManagerBLL;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace CheckManager.Controllers
 {
@@ -14,7 +11,7 @@ namespace CheckManager.Controllers
         public async Task<IActionResult> Index()
         {
             var manager = new BllManager();
-            Stopwatch sw=new Stopwatch();
+            Stopwatch sw = new Stopwatch();
             sw.Start();
             var list = await manager.GeBrandInfosAsycn("test");
             sw.Stop();
@@ -22,7 +19,7 @@ namespace CheckManager.Controllers
             sw.Restart();
             var list1 = manager.GeBrandInfos("test");
             sw.Stop();
-            var bb=sw.ElapsedMilliseconds;
+            var bb = sw.ElapsedMilliseconds;
 
             return View(list);
         }
@@ -31,6 +28,7 @@ namespace CheckManager.Controllers
         {
             return View();
         }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
