@@ -23,6 +23,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateWebApi", "TemplateWebApi\TemplateWebApi.csproj", "{0921974B-C6FB-4B94-A912-24DE7F00F5DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QianKunModel", "QianKunModel\QianKunModel.csproj", "{28ECD441-4944-4C53-B441-8E4741E94E83}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +69,14 @@ Global
 		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{263D24D8-A8EE-49F5-AF7D-9DCE95D34DC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0921974B-C6FB-4B94-A912-24DE7F00F5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0921974B-C6FB-4B94-A912-24DE7F00F5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0921974B-C6FB-4B94-A912-24DE7F00F5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0921974B-C6FB-4B94-A912-24DE7F00F5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28ECD441-4944-4C53-B441-8E4741E94E83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28ECD441-4944-4C53-B441-8E4741E94E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28ECD441-4944-4C53-B441-8E4741E94E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28ECD441-4944-4C53-B441-8E4741E94E83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>\QianKunModel.xml</DocumentationFile>
+    <OutputPath>E:\TestProject\QianKun\TemplateWebApi\bin\Debug\</OutputPath>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+</Project>
