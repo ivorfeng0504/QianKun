@@ -16,35 +16,29 @@ using Autofac;
 
 namespace QianKunConsole
 {
-    class Program
+    internal class Program
     {
         private static QianKun QianKun = new QianKun();
-        private static IContainer container { get; set; }
-        static void Main(string[] args)
+        public static IContainer container { get; set; }
+
+        private static void Main(string[] args)
         {
-            Console.WriteLine($"action[{Thread.CurrentThread.ManagedThreadId}]");
             Stopwatch st = new Stopwatch();//实例化类
             st.Start();//开始计时
+
             var builder = new ContainerBuilder();
             builder.RegisterType<ConsoleOutput>().As<IOutput>();
             builder.RegisterType<TodayWriter>().As<IDateWriter>();
             container = builder.Build();
 
-            using (var scope = container.BeginLifetimeScope())
-            {
-                var writer = scope.Resolve<IDateWriter>();
-                writer.WriteDate();
-            }
-
-            Console.WriteLine("ok");
+            AutofacCommon.WriteDate();
 
             st.Stop();//终止计时
             Console.WriteLine($"action[{Thread.CurrentThread.ManagedThreadId}]【耗时：{st.ElapsedMilliseconds}】");
             Console.ReadKey();
-
-
         }
     }
+
     public class Parent
     {
         public Parent()
@@ -56,7 +50,8 @@ namespace QianKunConsole
     public class QianKun : Parent
     {
         public string x;
-        ILog _log;
+        private ILog _log;
+
         public QianKun()
         {
             Console.WriteLine("qiankeun");
@@ -64,6 +59,7 @@ namespace QianKunConsole
         }
 
         #region async&await
+
         public async Task<int> Action()
         {
             Console.WriteLine("喝茶1...");
@@ -74,11 +70,13 @@ namespace QianKunConsole
             Console.WriteLine(title2);
             return (title1 + title2).Length;
         }
+
         public Task<string> LookNewsTitleAsync(int sleep)
         {
             Console.WriteLine("LookNewsTitleAsync:" + Thread.CurrentThread.ManagedThreadId);
             return Task.Run(() => LookNewsTitle(sleep));
         }
+
         public string LookNewsTitle(int sleep)
         {
             Console.WriteLine("LookNewsTitle:" + Thread.CurrentThread.ManagedThreadId);
@@ -96,6 +94,7 @@ namespace QianKunConsole
             Console.WriteLine($"A[{Thread.CurrentThread.ManagedThreadId}]");
             return 300;
         }
+
         public Task<int> B500Asycn()
         {
             return Task.Run(() =>
@@ -105,6 +104,7 @@ namespace QianKunConsole
                 return 500;
             });
         }
+
         public Task<int> B400Asycn()
         {
             return Task.Run(() =>
@@ -113,11 +113,12 @@ namespace QianKunConsole
                 Console.WriteLine($"B[{Thread.CurrentThread.ManagedThreadId}]");
                 return 400;
             });
-
         }
-        #endregion
+
+        #endregion async&await
 
         #region Parallel
+
         public void ParallelTesting()
         {
             Parallel.For(0, 1001, new ParallelOptions { MaxDegreeOfParallelism = 1000 }, x =>
@@ -126,6 +127,7 @@ namespace QianKunConsole
                     _log.Info($"{x}:{rep.Data}:{Thread.CurrentThread.ManagedThreadId}");
                 });
         }
+
         public void NotParallelTesting()
         {
             for (int i = 0; i < 220; i++)
@@ -151,7 +153,8 @@ namespace QianKunConsole
                 }
             }
         }
-        #endregion
+
+        #endregion Parallel
 
         #region HttpClient
 
@@ -165,43 +168,8 @@ namespace QianKunConsole
         public void Get()
         {
             _log.Debug("");
-
         }
 
-        #endregion
-
-        #region 反射
-
-
-
-        #endregion
-    }
-    public interface IOutput
-    {
-        void Write(string content);
-    }
-    public class ConsoleOutput : IOutput
-    {
-        public void Write(string content)
-        {
-            Console.WriteLine(content);
-        }
-    }
-    public interface IDateWriter
-    {
-        void WriteDate();
-    }
-    public class TodayWriter : IDateWriter
-    {
-        private IOutput _output;
-        public TodayWriter(IOutput output)
-        {
-            _output = output;
-        }
-
-        public void WriteDate()
-        {
-            _output.Write(DateTime.Today.ToShortDateString());
-        }
+        #endregion HttpClient
     }
 }

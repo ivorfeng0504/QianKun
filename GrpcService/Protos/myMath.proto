@@ -1,0 +1,17 @@
+﻿syntax="proto3";
+
+option csharp_namespace="CrpcService";
+
+package MyMath;
+
+service MyMath{
+	rpc Add(AddRquest) returns(AddReply);
+}
+
+message AddRquest{
+	int32 x=1;
+	int32 y=2;
+}
+message AddReply{
+	string sum=1;
+}

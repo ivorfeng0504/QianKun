@@ -25,7 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TemplateWebApi", "TemplateWebApi\TemplateWebApi.csproj", "{0921974B-C6FB-4B94-A912-24DE7F00F5DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QianKunModel", "QianKunModel\QianKunModel.csproj", "{28ECD441-4944-4C53-B441-8E4741E94E83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QianKunModel", "QianKunModel\QianKunModel.csproj", "{28ECD441-4944-4C53-B441-8E4741E94E83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcService", "GrpcService\GrpcService.csproj", "{0E4A8409-82E5-4D9E-A258-B4C9DB094F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "GrpcClient\GrpcClient.csproj", "{EEEE81B8-F85A-48E7-8450-5983CA7F1BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +81,14 @@ Global
 		{28ECD441-4944-4C53-B441-8E4741E94E83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28ECD441-4944-4C53-B441-8E4741E94E83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28ECD441-4944-4C53-B441-8E4741E94E83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4A8409-82E5-4D9E-A258-B4C9DB094F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4A8409-82E5-4D9E-A258-B4C9DB094F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4A8409-82E5-4D9E-A258-B4C9DB094F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4A8409-82E5-4D9E-A258-B4C9DB094F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEEE81B8-F85A-48E7-8450-5983CA7F1BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEEE81B8-F85A-48E7-8450-5983CA7F1BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEEE81B8-F85A-48E7-8450-5983CA7F1BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEEE81B8-F85A-48E7-8450-5983CA7F1BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
