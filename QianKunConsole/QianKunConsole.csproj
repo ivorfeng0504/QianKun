@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CheckManagerBLL\CheckManagerBLL.csproj" />
+    <ProjectReference Include="..\QianKunAutofuc\QianKunAutofac.csproj" />
     <ProjectReference Include="..\QianKunHelper\QianKunHelper.csproj" />
   </ItemGroup>
 

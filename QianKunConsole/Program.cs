@@ -1,40 +1,36 @@
-﻿using QianKunHelper.LogHelper;
+﻿using Autofac;
+using QianKunHelper.CacheHelper;
+using QianKunHelper.LogHelper;
+using QianKunHelper.WebApiHelper;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using CheckManagerBLL;
-using CheckManagerModel;
-using QianKunHelper;
-using QianKunHelper.CacheHelper;
-using QianKunHelper.DBHelper;
-using QianKunHelper.WebApiHelper;
-using Autofac;
+using QianKunAutofac;
 
 namespace QianKunConsole
 {
-    internal class Program
+    public class Program
     {
         private static QianKun QianKun = new QianKun();
-        public static IContainer container { get; set; }
 
         private static void Main(string[] args)
         {
-            Stopwatch st = new Stopwatch();//实例化类
-            st.Start();//开始计时
-
             var builder = new ContainerBuilder();
-            builder.RegisterType<ConsoleOutput>().As<IOutput>();
-            builder.RegisterType<TodayWriter>().As<IDateWriter>();
-            container = builder.Build();
+            builder.RegisterType<A>().AsSelf().As<IStartable>().InstancePerLifetimeScope();
+            builder.RegisterType<B>().InstancePerDependency();
+            AutofacTest.Container = builder.Build();
 
-            AutofacCommon.WriteDate();
+            AutofacTest autofacTest = new AutofacTest();
+            int flag = 0;
 
-            st.Stop();//终止计时
-            Console.WriteLine($"action[{Thread.CurrentThread.ManagedThreadId}]【耗时：{st.ElapsedMilliseconds}】");
+            while (flag != 99)
+            {
+                autofacTest.LazyInstantiation();
+                int.TryParse(Console.ReadLine(), out flag);
+            }
+
+            Console.WriteLine("======END=====");
             Console.ReadKey();
         }
     }

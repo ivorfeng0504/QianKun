@@ -1,5 +1,6 @@
 ﻿using System;
 using Autofac;
+using QianKunAutofac;
 
 namespace QianKunConsole
 {
@@ -7,7 +8,7 @@ namespace QianKunConsole
     {
         public static void WriteDate()
         {
-            using (var scope = Program.container.BeginLifetimeScope())
+            using (var scope = AutofacTest.Container.BeginLifetimeScope())
             {
                 var write = scope.Resolve<IDateWriter>();
                 write.WriteDate();
